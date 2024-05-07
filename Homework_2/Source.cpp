@@ -60,36 +60,36 @@ public:
 		return C239(x * inverse(d));
 	}
 
-	friend C239 operator+(int d, C239 c)
+	friend C239 operator+(int d, const C239& c)
 	{
 		return C239((c.x + d) % C);
 	}
-	friend C239 operator-(int d, C239 c)
+	friend C239 operator-(int d, const C239& c)
 	{
 		return C239((c.x - d) % C);
 	}
-	friend C239 operator*(int d, C239 c)
+	friend C239 operator*(int d, const C239& c)
 	{
 		return C239((c.x * d) % C);
 	}
-	friend C239 operator/(int d, C239 c)
+	friend C239 operator/(int d, C239& c)
 	{
 		return C239(d * c.inverse(c.x));
 	}
 
-	C239 operator+(C239 c)
+	C239 operator+(const C239& c)
 	{
 		return C239((x + c.x) % C);
 	}
-	C239 operator-(C239 c)
+	C239 operator-(const C239& c)
 	{
 		return C239((x - c.x) % C);
 	}
-	C239 operator*(C239 c)
+	C239 operator*(const C239& c)
 	{
 		return ((x * c.x) % C);
 	}
-	C239 operator/(C239 c)
+	C239 operator/(C239& c)
 	{
 		return C239(x * c.inverse(c.x));
 	}
@@ -110,17 +110,17 @@ public:
 		return *this;
 	}
 
-	C239 operator+=(C239 c)
+	C239 operator+=(const C239& c)
 	{
 		x = (c.x + x) % C;
 		return c;
 	}
-	C239 operator-=(C239 c)
+	C239 operator-=(const C239& c)
 	{
 		x = (c.x - x) % C;
 		return c;
 	}
-	C239 operator*=(C239 c)
+	C239 operator*=(const C239& c)
 	{
 		x = (c.x * x) % C;
 		return c;
@@ -196,7 +196,7 @@ public:
 			return 0;
 		}
 	}
-	friend bool operator>(int d, C239 c)
+	friend bool operator>(int d, const C239& c)
 	{
 		d = mod(d);
 		if (c.x < d)
@@ -210,7 +210,7 @@ public:
 			return 0;
 		}
 	}
-	friend bool operator<(int d, C239 c)
+	friend bool operator<(int d, const C239& c)
 	{
 		d = mod(d);
 		if (c.x > d)
@@ -224,7 +224,7 @@ public:
 			return 0;
 		}
 	}
-	friend bool operator>=(int d, C239 c)
+	friend bool operator>=(int d, const C239& c)
 	{
 		d = mod(d);
 		if (c.x <= d)
@@ -238,7 +238,7 @@ public:
 			return 0;
 		}
 	}
-	friend bool operator<=(int d, C239 c)
+	friend bool operator<=(int d, const C239& c)
 	{
 		d = mod(d);
 		if (c.x >= d)
@@ -252,7 +252,7 @@ public:
 			return 0;
 		}
 	}
-	friend bool operator!=(int d, C239 c)
+	friend bool operator!=(int d, const C239& c)
 	{
 		d = mod(d);
 		if (c.x != d)
@@ -266,59 +266,69 @@ public:
 			return 0;
 		}
 	}
-	bool operator>(C239 c)
+	bool operator>(const C239& c)
 	{
 		if (x > c.x)
 		{
 			std::cout << "Inequality is true." << std::endl;
+			return 1;
 		}
 		else
 		{
 			std::cout << "Inequality is false." << std::endl;
+			return 0;
 		}
 	}
-	bool operator<(C239 c)
+	bool operator<(const C239& c)
 	{
 		if (x < c.x)
 		{
 			std::cout << "Inequality is true." << std::endl;
+			return 1;
 		}
 		else
 		{
 			std::cout << "Inequality is false." << std::endl;
+			return 0;
 		}
 	}
-	bool operator>=(C239 c)
+	bool operator>=(const C239& c)
 	{
 		if (x >= c.x)
 		{
 			std::cout << "Inequality is true." << std::endl;
+			return 1;
 		}
 		else
 		{
 			std::cout << "Inequality is false." << std::endl;
+			return 0;
 		}
 	}
-	bool operator<=(C239 c)
+	bool operator<=(const C239& c)
 	{
 		if (x <= c.x)
 		{
 			std::cout << "Inequality is true." << std::endl;
+			return 1;
 		}
 		else
 		{
 			std::cout << "Inequality is false." << std::endl;
+			return 0;
 		}
 	}
-	bool operator!=(C239 c)
+	bool operator!=(const C239& c)
 	{
 		if (x != c.x)
 		{
 			std::cout << " True." << std::endl;
+			return 1;
 		}
 		else
 		{
 			std::cout << "Inequality is false." << std::endl;
+			return 0;
 		}
 	}
 
@@ -358,15 +368,23 @@ int main(int argc, char* argv[])
 {
 	C239 x1(239);
 	C239 x2(-100);
+	C239 x4(535);
 	int a1 = 10;
-	x2 = x2 ^ 3;
-
-	std::cout << x2;
+	
+	std::cout << " addition " << x2 + a1 << a1 + x2 << x2 + x4 << std::endl;
+	std::cout << " subtraction " << x2 - a1 << a1 - x2 << x2 - x4 << std::endl;
+	std::cout << " multiplication " << x2 * a1 << a1 * x2 << x2 * x4 << std::endl;
+	std::cout << " division " << x2 / a1 << a1 / x2  << x2 / x4 << std::endl;
+	std::cout << " BinPow " << (x2 ^ 3) << std::endl;
+	std::cout << " += " << (x2 += a1) << " " << (x2 += x4) << std::endl;
+	std::cout << " -= " << (x2 -= a1) << " " << (x2 -= x4) << std::endl;
+	std::cout << " *= " << (x2 *= a1) << " " << (x2 *= x4) << std::endl;
+	std::cout << " > and < " << (x2 > x4) << " " << (x2 < x4) << std::endl;
 
 	try
 	{
 		C239 x3 = a1 / x1;
-		std::cout << x3;
+		std::cout << " Division by zero " << x3;
 	}
 	catch (std::string& error_message)
 	{

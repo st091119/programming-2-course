@@ -1,5 +1,5 @@
 #include <iostream>
-//выравнивание памяти
+//оптимизатор
 class A {
 	int a, b;
 	double c, d;
@@ -12,10 +12,10 @@ class B
 {
 	char e[42];
 	bool h, g;
-	double c, d;
 	int a;
 	int f[2];
 	int b;
+	double c, d;
 };
 
 int main(int argc, char* argv[])
